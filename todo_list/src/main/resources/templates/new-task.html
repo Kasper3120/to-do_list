@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.css}"/>
+  <link th:rel="stylesheet" th:href="@{assets/bootstrap-datepicker/css/bootstrap-datepicker.standalone.css}"/>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.2.3/css/bootstrap.min.css}">
+  <title>New task</title>
+</head>
+<body>
+  <div class="row mt-5">
+    <div class="col-2">
+      <p><a class="btn btn-outline-success" href="/">
+        <i class="bi bi-arrow-left-square-fill"></i>Return</a>
+      </p>
+    </div>
+    <div class="col-6"></div>
+    <h2>Add a new task</h2>
+    <form action="#" th:action="@{/task}" th:object="${task}" method="POST">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input class="form-control"
+               type="text"
+               th:field="*{title}"
+               id="title"
+               placeholder="title">
+        <label for="description">Description</label>
+        <br>
+        <input class="form-control"
+               type="text"
+               th:field="*{description}"
+               id="description"
+               placeholder="Description">
+        <br>
+        <label for="due-date">Due date</label>
+        <div class="input-group date">
+          <input type="text" class="form-control" placeholder="dd/mm/yyyy" min="[[${#dates.format(#dates.createNow(),'dd/MM/yyyy')}]]" id="due-date" autocomplete="off" th:field="*{dueDate}"/>
+          <div class="input-group-append">
+            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-outline-success">
+        <i class="bi bi-plus-square-fill"></i> Add task
+        </button>
+      </div>
+    </form>
+  </div>
+  <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+  <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
+
+  <script>
+    $('.input-group.date').datepicker({
+      autoclose: true,
+      todayHighlight: true
+    });
+  </script>
+</body>
+</html>
